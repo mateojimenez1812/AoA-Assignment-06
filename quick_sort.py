@@ -1,6 +1,6 @@
 """
-Lab 06 - Analysis of Algorithms
-Ejercicio 4: Implementación de Quick Sort y pruebas con listas aleatorias
+Analysis of Algorithms - Assignment 06
+Exercise 4: Quick Sort implementation, tested on randomly generated lists
 """
 import random
 
@@ -10,7 +10,7 @@ class Counter:
 
 
 def partition(arr, low, high, counter=None):
-    """Partición de Lomuto: usa arr[high] como pivote."""
+    """Lomuto partition: uses arr[high] as the pivot."""
     pivot = arr[high]
     i = low - 1
     for j in range(low, high):
@@ -24,10 +24,10 @@ def partition(arr, low, high, counter=None):
 
 
 def quick_sort(arr, low=0, high=None, counter=None, randomized=True):
-    """Quick Sort in-place. Si randomized=True, el pivote se elige al azar."""
+    """In-place Quick Sort. If randomized=True, the pivot is chosen at random."""
     if high is None:
         high = len(arr) - 1
-    # Iteración sobre la parte más grande para limitar la profundidad de recursión
+    # Loop over the larger part to limit recursion depth
     while low < high:
         if randomized:
             r = random.randint(low, high)
@@ -43,15 +43,13 @@ def quick_sort(arr, low=0, high=None, counter=None, randomized=True):
 
 
 if __name__ == "__main__":
-    print("=" * 60)
-    print("EJERCICIO 4: Quick Sort con listas aleatorias")
-    print("=" * 60)
+    print("EXERCISE 4: Quick Sort on random lists")
     random.seed(42)
     for n in [10, 15, 20]:
         lst = [random.randint(0, 99) for _ in range(n)]
         print(f"\nn = {n}")
-        print("Entrada :", lst)
-        print("Salida  :", quick_sort(lst[:]))
+        print("Input  :", lst)
+        print("Output :", quick_sort(lst[:]))
 
     print()
     tests, ok = 2000, 0
@@ -59,4 +57,4 @@ if __name__ == "__main__":
         lst = [random.randint(-10**6, 10**6) for _ in range(random.randint(0, 500))]
         if quick_sort(lst[:]) == sorted(lst):
             ok += 1
-    print(f"{ok}/{tests} listas aleatorias ordenadas correctamente (comparadas con sorted())")
+    print(f"{ok}/{tests} random lists sorted correctly (compared with sorted())")
